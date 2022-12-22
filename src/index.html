@@ -3,13 +3,32 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" />
     <title>Homework 11</title>
   </head>
+
   <body>
-    <input type="text" id="search-box" />
-    <ul class="country-list"></ul>
-    <div class="country-info"></div>
+    <div class="search-box">
+    <form class="search-form" id="search-form">
+  <div class="button-box">
+    <input
+    type="text"
+    name="searchQuery"
+    autocomplete="off"
+    placeholder="Search images..."
+  />
+  
+  <button type="submit" >
+ <img class="search-button"  src="/src/img/magnifying-glass-svgrepo-com.svg" alt="Loop">
+  </button>
+ </div>
+</form>
+</div>
+
+<div class="gallery">
+  <!-- Картки зображень -->
+</div>
+
 
     <script src="/src/js/index.js" type="module"></script>
   </body>
