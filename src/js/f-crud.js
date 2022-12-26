@@ -7,7 +7,7 @@ const postToAdd = {
 };
 
 ///* GET ///
-export const getItems = () => {
+export const getItems = (postToAdd) => {
     return fetch(`${BASE_URL}`)
         .then(res => {
             if (res.ok) {
@@ -38,7 +38,7 @@ export const getItemById = (BASE_URL, itemId) => {
 };
 
 ///* POST ///
-export const postItem = (item) => {
+export const postItem = async (item) => {
     const options = {
         method: 'POST',
         headers: {
@@ -47,15 +47,16 @@ export const postItem = (item) => {
         body: JSON.stringify(item),
     
     };
-    return fetch(BASE_URL, options)
-        .then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-            throw new Error(res.statusText);
-        })
-        .then(console.log(data))
-        .catch(error => { console.log('Error postItem', error); });
+    try {
+        const response = await fetch(BASE_URL, options);
+        return await response.json();
+        
+    } catch (error) {
+        console.log('Error postItem', error);
+    } 
+    
+    
+    
 };
 // postItem({ title: 'new' });
 
