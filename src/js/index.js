@@ -4,15 +4,7 @@ import axios from "axios";
 import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css"; 
 
-new SimpleLightbox('.gallery a', {
-  captionType: "attr",
-  captionsData: "alt",
-  captionPosition: "bottom",
-  captionDelay: 250,
-  enableKeyboard: true,
-  docClose: true,
-  scaleImageToRatio: true,
-});
+
 
 const refs = {
   searchForm: document.querySelector('.search-form'),
@@ -83,13 +75,21 @@ async function onInput(e) {
         refs.gallery.insertAdjacentHTML('beforeend',
           renderCard(response.data.hits));
         
-        console.log(response);
-        console.log(response.data.hits);
-
+        new SimpleLightbox('.gallery a', {
+          captionType: "attr",
+          captionsData: "alt",
+          captionPosition: "bottom",
+          captionDelay: 250,
+          enableKeyboard: true,
+          docClose: true,
+          scaleImageToRatio: true,
+        });
+        
         if (response.data.totalHits > fetchOptions.per_page) {
           refs.buttonLoadMore.classList.remove('visually-hidden');
         }
         
+
         if (fetchOptions.page === 1) {
           notify.succes(response);
         }
@@ -105,6 +105,7 @@ async function onInput(e) {
 function onLoadMore(e) {
   fetchOptions.page += 1;
   onInput(e);
+  SimpleLightbox.refresh();
 }
 
 function renderCard(obj) {
@@ -160,11 +161,11 @@ function onFotoClick(e) {
   e.preventDefault();
 }
 
-const { height: cardHeight } = document
-  .querySelector(".gallery")
-  .firstElementChild.getBoundingClientRect();
+// const { height: cardHeight } = document
+//   .querySelector(".gallery")
+//   .firstElementChild.getBoundingClientRect();
 
-window.scrollBy({
-  top: cardHeight * 2,
-  behavior: "smooth",
-});
+// window.scrollBy({
+//   top: cardHeight * 2,
+//   behavior: "smooth",
+// });
